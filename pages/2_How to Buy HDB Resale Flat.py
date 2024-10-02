@@ -6,6 +6,12 @@ from crewai import Agent, Task, Crew
 from crewai_tools import WebsiteSearchTool
 from pathlib import Path
 
+# following definition to resolve the sqlite3 runtime error on Streamlit Community Cloud
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import sqlite3
+
 def main():
     # Check if the password is correct.  
     if not check_password():  
