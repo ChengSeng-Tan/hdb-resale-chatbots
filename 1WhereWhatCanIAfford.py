@@ -6,6 +6,12 @@ from langchain_openai import OpenAI
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain.agents.agent_types import AgentType
 
+# following definition to resolve the sqlite3 runtime error on Streamlit Community Cloud
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import sqlite3
+
 def main():
     # Check if the password is correct.  
     if not check_password():  
