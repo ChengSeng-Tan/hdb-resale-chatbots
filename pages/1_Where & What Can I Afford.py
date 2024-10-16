@@ -16,9 +16,6 @@ from langchain.agents.agent_types import AgentType
 #sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 def main():
-    # Check if the password is correct.  
-    if not check_password():  
-        st.stop()
     
     # region <--------- Streamlit App Configuration --------->
     st.set_page_config(
@@ -26,6 +23,8 @@ def main():
         page_title="Query on HDB Resale Transactions"
     )
     # endregion <--------- Streamlit App Configuration --------->
+ 
+    st.header(":moneybag: **:blue[What & Where Can I Afford?]**")   
     
     # Load the data file into session date
     if "df" not in st.session_state:
@@ -38,8 +37,6 @@ def main():
     # convert to datetime format
     max_date = max_date.to_pydatetime()
     min_date = min_date.to_pydatetime()
-        
-    st.header(":moneybag: **:blue[What & Where Can I Afford?]**")
   
     # Sidebar for Filters
     st.sidebar.header(":level_slider: Filters")
@@ -118,8 +115,33 @@ def main():
         st.write(f":level_slider: {filter_line}")
     
     tab1, tab2, tab3 = st.tabs([":speech_balloon: Ask Price", ":page_facing_up: Listing of Resale Transactions",":bar_chart: Distribution of Transacted Resale Prices by Town and Flat Type"])
+             
+    with tab2:
+        # Format the DataFrame
+        ddff = dff.style.format({
+                    'resale_price': '${:,.0f}',  # Format as $
+                    'floor_area_sqm': '${:.0f}',  # Format as $
+                    'month': lambda x: x.strftime('%Y-%m')  # Format date
+                })
+        st.dataframe(ddff, use_container_width=True)
+    with tab3:
+        # Display overall min, max, and median resale transacted prices
+        resale_price_stats = f"Transacted prices range from ${dff['resale_price'].min():,.0f} to ${dff['resale_price'].max():,.0f}; median is ${dff['resale_price'].median():,.0f}"
+        #st.markdown(resale_price_stats)
+        st.markdown(
+            f'<p>{resale_price_stats}</p>',
+            unsafe_allow_html=True
+        )
+        # Display boxplots by selected towns, flat types
+        st.plotly_chart(fig, use_container_width=True) 
+
     with tab1:
-       # Define large language model (LLM)
+        
+        # Check if the password is correct.  
+        if not check_password():  
+            st.stop()    
+       
+        # Define large language model (LLM)
         llm = OpenAI(api_key=st.secrets['OPENAI_API_KEY'],temperature=0.0)
     
         # Define pandas df agent
@@ -142,26 +164,7 @@ def main():
                 with st.expander(":gear: Chatbot's scratchpad"):
                     st.write(response["intermediate_steps"])
                 st.text_area(label="",value=response["output"])
-                
-    with tab2:
-        # Format the DataFrame
-        ddff = dff.style.format({
-                    'resale_price': '${:,.0f}',  # Format as $
-                    'floor_area_sqm': '${:.0f}',  # Format as $
-                    'month': lambda x: x.strftime('%Y-%m')  # Format date
-                })
-        st.dataframe(ddff, use_container_width=True)
-    with tab3:
-        # Display overall min, max, and median resale transacted prices
-        resale_price_stats = f"Transacted prices range from ${dff['resale_price'].min():,.0f} to ${dff['resale_price'].max():,.0f}; median is ${dff['resale_price'].median():,.0f}"
-        #st.markdown(resale_price_stats)
-        st.markdown(
-            f'<p>{resale_price_stats}</p>',
-            unsafe_allow_html=True
-        )
-        # Display boxplots by selected towns, flat types
-        st.plotly_chart(fig, use_container_width=True) 
-
+   
 if __name__ == "__main__":
     main()   
 

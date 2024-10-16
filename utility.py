@@ -32,7 +32,7 @@ def check_password():
         return True  
     
     # Show input for password.  
-    with st.sidebar.container(border=True):
+    with st.container(border=True):
         st.write("Enter password to use chatbot")
         st.text_input(  
             "Password", type="password", on_change=password_entered, key="password"  

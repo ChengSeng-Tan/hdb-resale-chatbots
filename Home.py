@@ -28,11 +28,15 @@ def main():
         col6.page_link("pages/2_How to Buy HDB Resale Flat.py", label="Go to Chatbot", icon="💬")
 
     # Disclaimer text
-    with st.expander("Disclaimer"):
-        st.write(f"**IMPORTANT NOTICE**: This web application is a prototype developed for educational purposes only. The information provided here is **NOT intended for real-world usage** and should not be relied upon for making any decisions, especially those related to financial, legal, or healthcare matters.")
-        st.write("**Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. You assume full responsibility for how you use any generated output.**")
-        st.write("Always consult with qualified professionals for accurate and personalized advice.")
-        st.write("")
+    with st.sidebar.expander("Disclaimer"):
+        disclaimer = """
+                    <strong>IMPORTANT NOTICE</strong>: This web application is a prototype developed for educational purposes only.
+                    The information provided here is <strong>NOT intended for real-world usage</strong> and should not be relied 
+                    upon for making any decisions, especially those related to financial, legal, or healthcare matters.
+                    Always consult with qualified professionals for accurate and personalized advice.
+                    """
+        d = f"<p style='font-size:14px;'>{disclaimer}</p>"
+        st.markdown(d, unsafe_allow_html=True)                
 
 if __name__ == "__main__":
     main()   
