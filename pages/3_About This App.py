@@ -61,5 +61,5 @@ st.markdown(f'''
             to discover how these tools work together in the chatbots.
             ''',unsafe_allow_html=True
         )
-#st.page_link("pages/4_Methodology.py", label="Discover how these tools work together in the chatbots")
+# display image of tools
 st.image("./assets/tools_used.png")

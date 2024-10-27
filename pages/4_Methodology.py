@@ -11,6 +11,7 @@ st.header(":hammer_and_wrench: **:blue[Methodology]**")
 
 st.write("Here's a peek into the :blue[internal workings] of the two :blue[chatbots] used in this Streamlit App.")
 
+# 1st Chatbot (Ask Price)
 st.subheader(":one::moneybag: Ask Resale Price Chatbox")
 st.write(":man: User Interface")
 st.write("""
@@ -34,6 +35,8 @@ st.write("""
             """
 )
 st.image("./assets/PriceChatbot_Flow.png")
+
+# 2nd Chatbot (Ask Process)
 st.subheader(":two::pencil: Ask Resale Process Chatbox")
 st.write(":man: User Interface")
 st.write("""

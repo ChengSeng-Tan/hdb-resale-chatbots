@@ -59,6 +59,7 @@ def main():
                                                  default=["3 ROOM","4 ROOM"],
                                                  placeholder="Select Flat Type(s)")
 
+    # creat a filtered dataframe
     dff = df[(df['town'].isin(selected_towns)) &
                   (df['flat_type'].isin(selected_flat_types)) &
                   (df['month'] >= pd.Period(selected_min_date, freq='M').start_time) & 
@@ -120,7 +121,8 @@ def main():
         # Format the DataFrame
         ddff = dff.style.format({
                     'resale_price': '${:,.0f}',  # Format as $
-                    'floor_area_sqm': '${:.0f}',  # Format as $
+                    'psf': '${:.0f}',            # Format as $
+                    'floor_area_sqm': '{:.0f}',  # Format as 0 decimal pt
                     'month': lambda x: x.strftime('%Y-%m')  # Format date
                 })
         st.dataframe(ddff, use_container_width=True)
@@ -152,7 +154,7 @@ def main():
         with st.form(key="Prompt"):
             prompt = st.text_area("Enter your query about HDB Resale Prices", height=45,
                                  help="e.g. What is the cheapest HDB flat sold. Give me a table breakdown by flat type?",
-                                 placeholder="List the price, floor level and remaining lease of the 5 most expensive flats in Toa Payoh.\nTell me the median price. Provide a table breakdown by town, flat type, remaining lease?\nIs there a high floor 4 Room flat sold for less than $400,000?")
+                                 placeholder="List the price, floor level, psf and remaining lease of the 5 most expensive flats in Toa Payoh.\nTell me the median price. Provide a table breakdown by town, flat type, remaining lease?\nIs there a high floor 4 Room flat sold for less than $400,000?")
             submit_button = st.form_submit_button(label="Ask Price")             
         
         with st.spinner(":hourglass_flowing_sand: Searching for information.  Please wait ..."):

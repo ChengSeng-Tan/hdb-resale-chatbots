@@ -25,6 +25,7 @@ def main():
     tab1, tab2 = st.tabs([":speech_balloon: Ask Process", ":jigsaw: Overview of the HDB Resale Buying Process"])
     
     with tab2:
+    #   show overview process 
         st.image("./assets/overview.png")   
     
     with tab1:    

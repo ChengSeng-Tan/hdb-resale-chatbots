@@ -13,14 +13,17 @@ def main():
   
     st.header(":house:**:blue[HDB Resale Flat Chatbots]**")
     
+    # Intro
     st.write("Buying a resale HDB flat in Singapore is challenging due to complex procedures, pricing uncertainty, and navigating grants and subsidies. Accurate pricing information is difficult to obtain, and the buying process can be overwhelming due to eligibility criteria, financing options, and documentation requirements.")
     
+    # Headline for 1st Chatbot
     with st.expander("Where & What Resale Flat Type Can I Afford?",expanded=True, icon="💰"):
         col1,col2,col3 = st.columns([2,6,2])
         col1.image("./assets/wherewhat.png")
         col2.write("Filter past HDB Resale transactions according to your preferred towns and flat type. Then ask questions about the chosen resale transaction listing.")
         col3.page_link("pages/1_Where & What Can I Afford.py", label="Go to Chatbot", icon="💬")
 
+    # Headline for 2nd Chatbot
     with st.expander("How Do I Go About Buying A Resale Flat?",expanded=True, icon="📝"):
         col4, col5, col6 = st.columns([2,6,2])
         col4.image("./assets/how.png")
@@ -28,7 +31,7 @@ def main():
         col6.page_link("pages/2_How to Buy HDB Resale Flat.py", label="Go to Chatbot", icon="💬")
 
     # Disclaimer text
-    with st.sidebar.expander("Disclaimer"):
+    with st.sidebar.expander("Disclaimer",expanded=True,icon="⚠️"):
         disclaimer = """
                     <strong>IMPORTANT NOTICE</strong>: This web application is a prototype developed for educational purposes only.
                     The information provided here is <strong>NOT intended for real-world usage</strong> and should not be relied 

@@ -12,7 +12,9 @@ filepath = "./data/hdb_resale_data_fr_Jan_2021.csv"
 def load_data():
 
     df = pd.read_csv(filepath, index_col=False)
-    df["month"] = pd.to_datetime(df['month'], format='%Y-%m')
+    df['month'] = pd.to_datetime(df['month'], format='%Y-%m')
+    # add a new column for the price psf
+    df['psf'] = df['resale_price'] / (df['floor_area_sqm']*10.7639)
     # sequence the Resale Price column towards the front
     price_col = df.pop('resale_price')
     df.insert(6, 'resale_price', price_col)
