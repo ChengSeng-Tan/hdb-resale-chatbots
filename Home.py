@@ -37,11 +37,7 @@ def main():
                     The information provided here is <strong>NOT intended for real-world usage</strong> and should not be relied 
                     upon for making any decisions, especially those related to financial, legal, or healthcare matters.
                     <strong>Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. 
-<<<<<<< HEAD
                     You assume full responsibility for how you use any generated output.</strong><br>
-=======
-                    You assume full responsibility for how you use any generated output.</strong>
->>>>>>> de0720041758f4cbafa6e4bfd3127fb1f97ba584
                     Always consult with qualified professionals for accurate and personalized advice.
                     """
         d = f"<p style='font-size:14px;'>{disclaimer}</p>"
